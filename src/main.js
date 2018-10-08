@@ -5,8 +5,10 @@ import App from './App'
 import router from '@/router'
 import store from '@/store/index.js'
 import { sync } from 'vuex-router-sync'
+import VTooltip from 'v-tooltip'
 
 sync(store, router)
+Vue.use(VTooltip)
 
 require('@/style/app.scss')
 
