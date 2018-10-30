@@ -4,12 +4,13 @@
       @keydown.down="suggestDown"
       @keydown.up.prevent="suggestUp"
       @keydown.esc="suggestReset"
+      @blur="suggestReset"
       @keydown.enter="requestSearchIfNotEmpty"/>
     <button class="overlay-button" @click="suggestSelectAndEnter(index)">
       <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
     </button>
 
-    <ul v-show="suggestions">
+    <ul v-show="suggestions.length" class="suggestions">
       <li class="suggestion__box"
           v-for="(suggestion, index) in suggestions"
           :key="index"
@@ -96,26 +97,34 @@ export default {
     margin-bottom: 5px;
   }
 
-  ul {
+  .suggestions {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+    color: $color-almost-black;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border: 1px solid $color-grey-blue;
+    background: $color-white;
   }
 
   .suggestion__box {
-      min-height: 2.7em;
-      outline: none;
-      padding: 8px 14px;
-      font: inherit;
-      line-height: 1.6;
-      color: $color-black;
-      border-radius: 3px;
-      -webkit-box-sizing: border-box;
-              box-sizing: border-box;
-      border: 1px solid $color-grey-blue;
-      background: $color-white;
-      vertical-align: middle;
-      position: relative;
+    min-height: 2.7em;
+    outline: none;
+    padding: 8px 14px;
+    font: inherit;
+    line-height: 1.6;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  .suggestion__box:hover {
+    cursor: pointer;
+    background: $color-lighter-blue;
   }
 
   .hidden {
@@ -123,7 +132,6 @@ export default {
   }
 
   .active {
-    background-color: $color-light-blue;
-    color: $color-white;
+    background-color: $color-lighter-blue;
   }
 </style>

@@ -31,8 +31,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .panel {
-    border: 2px $color-light-pink solid;
-  }
-</style>

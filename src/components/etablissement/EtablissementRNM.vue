@@ -19,3 +19,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .panel + .panel {
+    margin-left: 2em;
+  }
+
+  @media (max-width: $tablet) {
+    .panel + .panel {
+      margin-left: 0;
+    }
+  }
+</style>
