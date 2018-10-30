@@ -20,7 +20,7 @@
               <h4>Base SIRENE</h4>
               <p>Information non trouvée</p>
             </div>
-            <div v-if="haveRNMInfo" class="api api__rnm">
+            <!-- <div v-if="haveRNMInfo" class="api api__rnm">
               <h4>Base RNM</h4>
               <p>Information disponible</p>
               <p>Dernière mise à jour : aujourd'hui</p>
@@ -28,10 +28,10 @@
             <div v-else class="api api__unavailable">
               <h4>Base RNM</h4>
               <p>Information non trouvée</p>
-            </div>
+            </div> -->
           </div>
           <div class="tabs__pair">
-            <div v-if="haveRNAInfo" class="api api__rna">
+            <!-- <div v-if="haveRNAInfo" class="api api__rna">
               <h4>Base RNA</h4>
               <p>Information disponible</p>
               <p>Dernière mise à jour : {{ this.lastUpdateRNA }}</p>
@@ -39,7 +39,7 @@
             <div v-else class="api api__unavailable">
               <h4>Base RNA</h4>
               <p>Information non trouvée</p>
-            </div>
+            </div> -->
             <div v-if="haveRNCSInfo" class="api api__rncs">
               <h4>Base RNCS</h4>
               <p>Information disponible</p>

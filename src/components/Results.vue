@@ -4,8 +4,8 @@
     <server-error v-else-if="serverError"></server-error>
     <template v-else>
       <results-sirene />
-      <hr />
-      <results-rna />
+      <!-- <hr /> -->
+      <!-- <results-rna /> -->
       <!-- paginate module on RNA and Sirene, so we use the bigger values -->
       <results-paginate-module :totalPages=biggerNumberPages></results-paginate-module>
     </template>
@@ -40,8 +40,12 @@ export default {
     serverError () {
       return this.$store.getters.mainAPIError
     },
+    // Removing RNA values for now
+    // biggerNumberPages () {
+    //   return Math.max(this.$store.getters.totalPageNumberSirene, this.$store.getters.totalPageNumberRNA)
+    // }
     biggerNumberPages () {
-      return Math.max(this.$store.getters.totalPageNumberSirene, this.$store.getters.totalPageNumberRNA)
+      return this.$store.getters.totalPageNumberSirene
     }
   },
   methods: {

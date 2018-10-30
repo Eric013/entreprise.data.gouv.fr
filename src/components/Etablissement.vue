@@ -5,8 +5,8 @@
   <div v-else class="container-general">
     <etablissement-header />
     <etablissement-sirene v-if=haveSireneInfo />
-    <etablissement-rna v-if=haveRNAInfo :haveComponentTop=haveSireneInfo />
-    <etablissement-rnm v-if=haveRNMInfo />
+    <!-- <etablissement-rna v-if=haveRNAInfo :haveComponentTop=haveSireneInfo />
+    <etablissement-rnm v-if=haveRNMInfo /> -->
     <etablissement-rncs v-if=haveRNCSInfo />
     <etablissement-map v-if=haveSireneInfo :positionEtablissement='coordinates' :etablissement='this.resultSirene'/>
   </div>

@@ -1,16 +1,16 @@
 <template>
   <div class="company">
     <section class="etablissement__section-grey">
-      <div class="container company-container company-container__header">
+      <!-- <div class="container company-container company-container__header">
         <etablissement-sirene-header />
-      </div>
+      </div> -->
       <div class="container company-container">
         <etablissement-sirene-contact />
         <etablissement-sirene-info />
       </div>
-      <div class="container company-container">
+      <!-- <div class="container company-container">
         <etablissement-sirene-children />
-      </div>
+      </div> -->
     </section>
   </div>
 </template>

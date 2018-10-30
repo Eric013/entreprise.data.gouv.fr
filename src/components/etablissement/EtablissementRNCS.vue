@@ -1,9 +1,9 @@
 <template>
   <div class="company">
     <section class="etablissement__section-grey">
-      <div class="container company-container company-container__header">
+      <!-- <div class="container company-container company-container__header">
         <etablissement-rncs-header />
-      </div>
+      </div> -->
       <div class="container company-container">
         <etablissement-rncs-identification/>
         <etablissement-rncs-activity/>
