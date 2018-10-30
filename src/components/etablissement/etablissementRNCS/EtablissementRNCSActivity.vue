@@ -2,37 +2,49 @@
   <div class="company__panel panel">
     <h4>Informations d'activité et d´établissement principal</h4>
     <hr>
-    <panel-info-rncs :parent=RNCSData :elements=this.elementsToDisplay />
+    <div class="company__item">
+      <div class="company__item-key">Greffe :</div>
+      <div class="company__item-value"> {{ RNCSConcatGreffe(this.RNCSData) }}</div>
+    </div>
+    <panel-info-rncs :parent=RNCSData :elements=this.elementsToDisplay1 />
+    <div class="company__item">
+      <div class="company__item-key">Type D'inscription :</div>
+      <div class="company__item-value"> {{ PrincipaleOrSecondaire(this.RNCSData.type_inscription) }}</div>
+    </div>
+    <panel-info-inline-rncs class="company__item" :parent=RNCSData :elements=this.elementsToDisplay2 />
   </div>
 </template>
 
 <script>
-import Filters from '@/components/mixins/filters'
 import PanelInfoRNCS from '@/components/templates/PanelInfoRNCS'
+import PanelInfoInlineRNCS from '@/components/templates/PanelInfoInlineRNCS'
+import Filters from '@/components/mixins/filters'
+import Formating from '@/components/mixins/formating'
 
 export default {
   name: 'EtablissementRNCSInfos',
-  components: { 'PanelInfoRncs': PanelInfoRNCS },
+  components: {
+    'PanelInfoRncs': PanelInfoRNCS,
+    'PanelInfoInlineRncs': PanelInfoInlineRNCS
+  },
   data () {
     return {
-      elementsToDisplay:
-        {
-          "Code Greffe": "code_greffe",
-          "Nom Greffe": "nom_greffe",
-          "Numero Gestion": "numero_gestion",
-          "SIREN": "siren",
-          "Type Inscription": "type_inscription",
-          "Date Immatriculation": "date_immatriculation",
-          "Date Première Immatriculation": "date_premiere_immatriculation",
-          "Date de Radiation": "date_radiation",
-          "Date de Transfert": "date_transfert",
-          "Sans Activité": "sans_activite",
-          "Date de début d'activité": "date_debut_activite",
-          "Date de Début de Première Activité": "date_debut_premiere_activite",
-          "Date de Cessation d'Activité": "date_cessation_activite",
-          "Date de dernière modification":"date_derniere_modification",
-          "Libéllé de dernière modification":"libelle_derniere_modification"
-        }
+      elementsToDisplay1:
+      {
+        "SIREN": "siren",
+        "Numero Gestion Greffe": "numero_gestion"
+      },
+      elementsToDisplay2:
+      {
+        "Date Immatriculation": "date_immatriculation",
+        "Date Première Immatriculation": "date_premiere_immatriculation",
+        "Date de Radiation": "date_radiation",
+        "Date de Transfert": "date_transfert",
+        "Sans Activité": "sans_activite",
+        "Date de début d'activité": "date_debut_activite",
+        "Date de Début de Première Activité": "date_debut_premiere_activite",
+        "Date de Cessation d'Activité": "date_cessation_activite",
+      }
     }
   },
   computed: {
@@ -40,7 +52,7 @@ export default {
       return this.$store.getters.RNCSData
     },
   },
-  mixins: [Filters]
+  mixins: [Filters, Formating]
 }
 </script>
 

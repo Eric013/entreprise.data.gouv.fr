@@ -5,6 +5,12 @@
     <div v-for="manager in managersPhysical" :key=manager.id>
       <h5>{{ manager.qualite | capitalize }}</h5>
       <panel-info-rncs :parent="manager" :elements=elementsToDisplay />
+      <div class="company__item-key">Adresse :</div>
+      <div class="company__item-value" v-if="manager.adresse_ligne_1">{{ manager.adresse_ligne_1 | ifExist }}</div>
+      <div class="company__item-value" v-if="manager.adresse_ligne_2">{{ manager.adresse_ligne_2 }}</div>
+      <div class="company__item-value" v-if="manager.adresse_ligne_3">{{ manager.adresse_ligne_3 }}</div>
+      <div class="company__item-value"> {{ RNCSConcatAddress(manager) }}</div>
+      <div class="company__item-value" v-if="manager.adresse_code_commune">Code Commune {{ manager.adresse_code_commune }}</div>
     </div>
     <panel-no-results-rncs :ifNotPresent="managersPhysical" />
   </div>
@@ -14,6 +20,7 @@
 import PanelInfoRNCS from '@/components/templates/PanelInfoRNCS'
 import PanelNoResultsRNCS from '@/components/templates/PanelNoResultsRNCS'
 import Filters from '@/components/mixins/filters'
+import Formating from '@/components/mixins/formating'
 
 export default {
   name: 'EtablissementRNCSGestionPhysique',
@@ -25,15 +32,6 @@ export default {
     return {
       elementsToDisplay:
         {
-          "Date de dernière modification": "date_derniere_modification",
-          "Libellé de dernière modification": "libelle_derniere_modification",
-          "Adresse Ligne 1": "adresse_ligne_1",
-          "Adresse Ligne 2": "adresse_ligne_2",
-          "Adresse Ligne 3": "adresse_ligne_3",
-          "Code postal": "adresse_code_postal",
-          "Ville": "adresse_ville",
-          "Code Commune": "adresse_code_commune",
-          "Pays": "adresse_pays",
           "Nom Patronyme": "nom_patronyme",
           "Nom d'Usage": "nom_usage",
           "Pseudonyme": "pseudonyme",
@@ -64,7 +62,7 @@ export default {
       return true
     }
   },
-  mixins: [Filters]
+  mixins: [Filters, Formating]
 }
 </script>
 
