@@ -10,7 +10,6 @@
         <etablissement-rna v-if=haveRNAInfo :haveComponentTop=haveSireneInfo />
         <etablissement-rnm v-if=haveRNMInfo />
         <etablissement-rncs v-if=haveRNCSInfo />
-        <etablissement-map v-if=haveSireneInfo :positionEtablissement='coordinates' :etablissement='this.resultSirene'/>
       </template>
     </div>
   </section>
@@ -26,7 +25,6 @@ import EtablissementSirene from '@/components/etablissement/EtablissementSirene'
 import EtablissementRNA from '@/components/etablissement/EtablissementRNA'
 import EtablissementRNM from '@/components/etablissement/EtablissementRNM'
 import EtablissementRNCS from '@/components/etablissement/EtablissementRNCS'
-import EtablissementMap from '@/components/etablissement/EtablissementMap'
 
 export default {
   name: 'Etablissement',
@@ -43,8 +41,7 @@ export default {
     'EtablissementSirene': EtablissementSirene,
     'EtablissementRna': EtablissementRNA,
     'EtablissementRnm': EtablissementRNM,
-    'EtablissementRncs': EtablissementRNCS,
-    'EtablissementMap': EtablissementMap
+    'EtablissementRncs': EtablissementRNCS
   },
   computed: {
     isEtablissementLoading () {
@@ -81,12 +78,6 @@ export default {
     resultSirene () {
       if (this.haveSireneInfo) {
         return this.$store.getters.singlePageEtablissementSirene
-      }
-      return null
-    },
-    coordinates () {
-      if (this.resultSirene && this.resultSirene.longitude && this.resultSirene.latitude) {
-        return [this.resultSirene.longitude, this.resultSirene.latitude]
       }
       return null
     }

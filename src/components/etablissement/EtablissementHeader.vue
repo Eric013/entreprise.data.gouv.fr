@@ -1,14 +1,18 @@
 <template>
   <div class="company">
-    <div class="title__block">
-      <h2 v-if="haveSireneInfo">{{resultSirene.nom_raison_sociale | removeExtraChars}} <span class="company__siren">({{ resultSirene.siren }})</span></h2>
-      <h2 v-if="haveOnlyRNAInfo">{{resultRNA.titre}} <span class="association__id">({{ resultRNA.id_association }})</span></h2>
+    <div class="company__main">
+      <div class="title__block">
+        <h2 v-if="haveSireneInfo">{{resultSirene.nom_raison_sociale | removeExtraChars}} <span class="company__siren">({{ resultSirene.siren }})</span></h2>
+        <h2 v-if="haveOnlyRNAInfo">{{resultRNA.titre}} <span class="association__id">({{ resultRNA.id_association }})</span></h2>
 
-      <template v-if="haveSireneInfo">
-        <div class="subtitle"> {{ resultSirene.l6_normalisee }}</div>
-        <div class="second__subtitle"> {{ resultSirene.libelle_activite_principale_entreprise }}</div>
-      </template>
-      <div v-if="haveOnlyRNAInfo" class="second__subtitle"> {{ resultRNA.titre_court}}</div>
+        <template v-if="haveSireneInfo">
+          <div class="subtitle"> {{ resultSirene.l6_normalisee }}</div>
+          <div class="second__subtitle"> {{ resultSirene.libelle_activite_principale_entreprise }}</div>
+        </template>
+        <div v-if="haveOnlyRNAInfo" class="second__subtitle"> {{ resultRNA.titre_court}}</div>
+        <etablissement-sirene-children />
+      </div>
+      <etablissement-map v-if=haveSireneInfo :positionEtablissement='coordinates' :etablissement='this.resultSirene'/>
     </div>
     <div class="tabs">
         <div v-if="haveSireneInfo" class="api api__sirene">
@@ -54,9 +58,15 @@
 
 <script>
 import Filters from '@/components/mixins/filters.js'
+import EtablissementSireneChildren from '@/components/etablissement/etablissementSirene/EtablissementSireneChildren'
+import EtablissementMap from '@/components/etablissement/EtablissementMap'
 
 export default {
   name: 'EtablissementHeader',
+  components: {
+    'EtablissementSireneChildren': EtablissementSireneChildren,
+    'EtablissementMap': EtablissementMap
+  },
   computed: {
     resultSirene () {
       return this.$store.getters.singlePageEtablissementSirene
@@ -96,6 +106,12 @@ export default {
       if (this.resultRNA.updated_at) {
         return this.resultRNA.updated_at.substring(0, 10)
       }
+    },
+    coordinates () {
+      if (this.resultSirene && this.resultSirene.longitude && this.resultSirene.latitude) {
+        return [this.resultSirene.longitude, this.resultSirene.latitude]
+      }
+      return null
     }
   },
   mixins: [Filters]
@@ -103,19 +119,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .company__main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    @media screen and (max-width: $desktop) {
+  }
+
+  #map {
+    margin-left: 2em;
+  }
+
+  @media (max-width: $desktop) {
+    .company__main {
       flex-direction: column;
+    }
+
+    #map {
+      margin-left: 0;
     }
   }
 
   h2 {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .tabs {

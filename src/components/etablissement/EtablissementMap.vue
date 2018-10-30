@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <div v-if="mapboxglSupported" class="panel" id="map" ref="map"></div>
-    <div v-else class="panel">
-      <p class="panel__message">Votre navigateur ne supporte pas WebGL et ne peut pas afficher la carte de l'établissement.</p>
-    </div>
+  <div v-if="mapboxglSupported" class="panel" id="map" ref="map"></div>
+  <div v-else class="panel">
+    <p class="panel__message">Votre navigateur ne supporte pas WebGL et ne peut pas afficher la carte de l'établissement.</p>
   </div>
 </template>
 
@@ -58,7 +56,8 @@ export default {
 <style lang="scss" scoped>
   #map {
     padding: 0;
-    height: 400px;
+    height: 350px;
+    min-width: 50%;
   }
 
   .panel__message {
